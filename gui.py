@@ -34,3 +34,34 @@ if __name__ == "__main__":
     
     w.show()
     sys.exit(app.exec_())'''
+
+
+    listaComs = self.ReadCOMS()
+        j=0
+        for i in listaComs:
+            print(listaComs[j])
+            self.COM_LIST.addItem("")  
+            self.COM_LIST.setItemText(j, _translate("SetupTools",str(listaComs[j]) ))
+            j = j +1
+
+    def ReadCOMS(self):
+        result = []
+        if sys.platform.startswith('win'):
+            ports = ['COM%s' % (i + 1) for i in range(256)]
+        for port in ports:
+            try:
+                s = serial.Serial(port)
+                s.close()
+                result.append(port)
+            except (OSError, serial.SerialException):
+                pass
+        return result   
+
+    if __name__ == "__main__":
+        import sys
+        app = QtWidgets.QApplication(sys.argv)
+        SetupTools = QtWidgets.QDialog()
+        ui = Ui_SetupTools()
+        ui.setupUi(SetupTools)
+        SetupTools.show()
+        sys.exit(app.exec_())

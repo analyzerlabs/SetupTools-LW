@@ -1,0 +1,4 @@
+crear INTERFAZ:
+
+pyuic5 -x C:\Users\miguel.quispe\Documents\GitHub\SetupTools-LW\setuptools.ui -o C:\Users\miguel.quispe\Documents\GitHub\SetupTools-LW\setuptools.py
+
