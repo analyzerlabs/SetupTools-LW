@@ -1755,9 +1755,12 @@ class Ui_SetupTools(object):
         baudrate = self.BAUDRATE_LIST.currentText()
         self.ser = serial.Serial(port , baudrate , timeout=5)
         self.IMEI_VALUE = self.readIMEI()
-        print(self.IMEI_VALUE)
         self.IMEI_LABEL.setText(str(self.IMEI_VALUE))
-
+        self.ICC_VALUE = self.readICC()
+        self.ICC_LABEL.setText(str(self.ICC_VALUE))
+        self.readMODEL()
+        #self.MODELO_VALUE = self.readMODEL()
+        #self.MODELO_LABEL.setText(str(self.MODELO_VALUE))
     
     def connectCOM(self):
         port = self.COM_LIST.currentText()
@@ -1769,7 +1772,7 @@ class Ui_SetupTools(object):
     def readICC(self):
         cmd="AT+QCCID\r"
         self.ser.write(cmd.encode())
-        time.sleep(1)
+        time.sleep(0.7)
         msg=self.ser.read(64)
         msg = str(msg)
         m = msg.rsplit("\\r\\n")
@@ -1779,12 +1782,23 @@ class Ui_SetupTools(object):
     def readIMEI(self):
         cmd="AT+CGSN\r"
         self.ser.write(cmd.encode())
-        time.sleep(0.5)
+        time.sleep(0.7)
         msg=self.ser.read(64)
         msg = str(msg)
         #m = msg.rsplit("QCCID: ")
         m = msg.rsplit("\\r\\n")
         return m[1]
+
+    def readMODEL(self):
+        cmd="AT+GTBSI\r"
+        self.ser.write(cmd.encode())
+        time.sleep(0.7)
+        msg=self.ser.read(64)
+        msg = str(msg)
+        #m = msg.rsplit("QCCID: ")
+        m = msg.rsplit("\\r\\n")
+        print(m)
+        #return m[1]
 
 if __name__ == "__main__":
     import sys
