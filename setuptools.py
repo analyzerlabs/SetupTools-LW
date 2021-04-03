@@ -10,12 +10,13 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication,QWidget, QVBoxLayout, QPushButton, QFileDialog , QLabel, QTextEdit
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QApplication,QWidget, QVBoxLayout, QPushButton, QFileDialog , QLabel, QTextEdit,QAbstractItemView
 
 import serial,time
+from PyQt5.QtGui import QPixmap
 
 class Ui_SetupTools(QWidget):
+    PORTS = [0,1,2,3]
     def setupUi(self, SetupTools):
         SetupTools.setObjectName("SetupTools")
         SetupTools.resize(1185, 600)
@@ -23,7 +24,7 @@ class Ui_SetupTools(QWidget):
         SetupTools.setAutoFillBackground(True)
         SetupTools.setSizeGripEnabled(False)
         SetupTools.setModal(False)
-        self.IMEI_VALUE = 867162027826197
+        self.IMEI_VALUE = [867162027826197,867162027826197,867162027826197,867162027826197]
         self.frame = QtWidgets.QFrame(SetupTools)
         self.frame.setGeometry(QtCore.QRect(250, 210, 120, 80))
         self.frame.setStyleSheet("")
@@ -81,6 +82,7 @@ class Ui_SetupTools(QWidget):
         self.pushButton.setObjectName("pushButton")
         self.listView = QtWidgets.QListView(SetupTools)
         self.listView.setGeometry(QtCore.QRect(910, 341, 241, 231))
+        self.listView.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.listView.setObjectName("listView")
         self.ConsolaLabel = QtWidgets.QLabel(SetupTools)
         self.ConsolaLabel.setGeometry(QtCore.QRect(170, 300, 281, 51))
@@ -363,11 +365,11 @@ class Ui_SetupTools(QWidget):
         brush.setStyle(QtCore.Qt.SolidPattern)
         self.mdiArea_4.setBackground(brush)
         self.mdiArea_4.setObjectName("mdiArea_4")
-        self.COM_LIST = QtWidgets.QComboBox(SetupTools)
-        self.COM_LIST.setGeometry(QtCore.QRect(250, 70, 81, 31))
-        self.COM_LIST.setEditable(False)
-        self.COM_LIST.setObjectName("COM_LIST")
-        self.COM_LIST.addItem("")
+        self.COM_LIST = [QtWidgets.QComboBox(SetupTools)]
+        self.COM_LIST[0].setGeometry(QtCore.QRect(250, 70, 81, 31))
+        self.COM_LIST[0].setEditable(False)
+        self.COM_LIST[0].setObjectName("COM_LIST[0]")
+        self.COM_LIST[0].addItem("")
         self.label_12 = QtWidgets.QLabel(SetupTools)
         self.label_12.setGeometry(QtCore.QRect(170, 70, 81, 31))
         self.label_12.setMaximumSize(QtCore.QSize(100, 16777215))
@@ -497,8 +499,8 @@ class Ui_SetupTools(QWidget):
         self.pushButton_2.setDefault(False)
         self.pushButton_2.setFlat(True)
         self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_3 = QtWidgets.QPushButton(SetupTools)
-        self.pushButton_3.setGeometry(QtCore.QRect(560, 240, 151, 31))
+        self.CARGAR_ARCHIVO = [QtWidgets.QPushButton(SetupTools)]
+        self.CARGAR_ARCHIVO[0].setGeometry(QtCore.QRect(560, 240, 151, 31))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -518,16 +520,16 @@ class Ui_SetupTools(QWidget):
         brush = QtGui.QBrush(QtGui.QColor(120, 120, 120))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, brush)
-        self.pushButton_3.setPalette(palette)
-        self.pushButton_3.setMouseTracking(True)
-        self.pushButton_3.setIconSize(QtCore.QSize(30, 30))
-        self.pushButton_3.setShortcut("")
-        self.pushButton_3.setCheckable(False)
-        self.pushButton_3.setAutoDefault(False)
-        self.pushButton_3.setDefault(False)
-        self.pushButton_3.setFlat(True)
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.pushButton_3.clicked.connect(self.getfiles)
+        self.CARGAR_ARCHIVO[0].setPalette(palette)
+        self.CARGAR_ARCHIVO[0].setMouseTracking(True)
+        self.CARGAR_ARCHIVO[0].setIconSize(QtCore.QSize(30, 30))
+        self.CARGAR_ARCHIVO[0].setShortcut("")
+        self.CARGAR_ARCHIVO[0].setCheckable(False)
+        self.CARGAR_ARCHIVO[0].setAutoDefault(False)
+        self.CARGAR_ARCHIVO[0].setDefault(False)
+        self.CARGAR_ARCHIVO[0].setFlat(True)
+        self.CARGAR_ARCHIVO[0].setObjectName("CARGAR_ARCHIVO[0]")
+        self.CARGAR_ARCHIVO[0].clicked.connect(self.getfiles)
         self.pushButton_4 = QtWidgets.QPushButton(SetupTools)
         self.pushButton_4.setGeometry(QtCore.QRect(720, 280, 151, 31))
         palette = QtGui.QPalette()
@@ -1010,9 +1012,10 @@ class Ui_SetupTools(QWidget):
         self.ConsolaLabel_4.setScaledContents(True)
         self.ConsolaLabel_4.setWordWrap(False)
         self.ConsolaLabel_4.setObjectName("ConsolaLabel_4")
-        self.listView_2 = QtWidgets.QListView(SetupTools)
-        self.listView_2.setGeometry(QtCore.QRect(170, 140, 701, 81))
-        self.listView_2.setObjectName("listView_2")
+        self.VISTA_COMANDOS = QtWidgets.QListView(SetupTools)
+        self.VISTA_COMANDOS.setGeometry(QtCore.QRect(170, 140, 701, 81))
+        self.VISTA_COMANDOS.setObjectName("VISTA_COMANDOS")
+        self.VISTA_COMANDOS.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.label_14 = QtWidgets.QLabel(SetupTools)
         self.label_14.setEnabled(True)
         self.label_14.setGeometry(QtCore.QRect(230, 10, 401, 33))
@@ -1165,8 +1168,10 @@ class Ui_SetupTools(QWidget):
         self.label_14.setOpenExternalLinks(False)
         self.label_14.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByKeyboard)
         self.label_14.setObjectName("label_14")
-        self.IMEI_LABEL = QtWidgets.QLabel(SetupTools)
-        self.IMEI_LABEL.setGeometry(QtCore.QRect(1010, 102, 140, 16))
+
+        self.IMEI_LABEL = [QtWidgets.QLabel(SetupTools)]
+        
+        self.IMEI_LABEL[0].setGeometry(QtCore.QRect(1010, 102, 140, 16))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -1177,11 +1182,11 @@ class Ui_SetupTools(QWidget):
         brush = QtGui.QBrush(QtGui.QColor(120, 120, 120))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, brush)
-        self.IMEI_LABEL.setPalette(palette)
+        self.IMEI_LABEL[0].setPalette(palette)
         font = QtGui.QFont()
         font.setPointSize(8)
-        self.IMEI_LABEL.setFont(font)
-        self.IMEI_LABEL.setObjectName("IMEI_LABEL")
+        self.IMEI_LABEL[0].setFont(font)
+        self.IMEI_LABEL[0].setObjectName("IMEI_LABEL")
         self.ICC_LABEL = QtWidgets.QLabel(SetupTools)
         self.ICC_LABEL.setGeometry(QtCore.QRect(1010, 127, 140, 16))
         palette = QtGui.QPalette()
@@ -1332,11 +1337,11 @@ class Ui_SetupTools(QWidget):
         self.label_15.setOpenExternalLinks(False)
         self.label_15.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByKeyboard)
         self.label_15.setObjectName("label_15")
-        self.BAUDRATE_LIST_2 = QtWidgets.QComboBox(SetupTools)
-        self.BAUDRATE_LIST_2.setGeometry(QtCore.QRect(610, 70, 71, 31))
-        self.BAUDRATE_LIST_2.setObjectName("BAUDRATE_LIST_2")
-        self.BAUDRATE_LIST_2.addItem("")
-        self.BAUDRATE_LIST_2.addItem("")
+        self.BYTE_SIZE = [QtWidgets.QComboBox(SetupTools)]
+        self.BYTE_SIZE[0].setGeometry(QtCore.QRect(610, 70, 71, 31))
+        self.BYTE_SIZE[0].setObjectName("BYTE_SIZE[0]")
+        self.BYTE_SIZE[0].addItem("")
+        self.BYTE_SIZE[0].addItem("")
         self.label_2 = QtWidgets.QLabel(SetupTools)
         self.label_2.setGeometry(QtCore.QRect(20, 50, 105, 91))
         self.label_2.setText("")
@@ -1349,8 +1354,8 @@ class Ui_SetupTools(QWidget):
         font.setPointSize(10)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
-        self.ConsolaLabel_5 = QtWidgets.QLabel(SetupTools)
-        self.ConsolaLabel_5.setGeometry(QtCore.QRect(300, 110, 571, 21))
+        self.LABEL_ARCHIVO = QtWidgets.QLabel(SetupTools)
+        self.LABEL_ARCHIVO.setGeometry(QtCore.QRect(300, 110, 571, 21))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -1487,12 +1492,12 @@ class Ui_SetupTools(QWidget):
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ToolTipText, brush)
-        self.ConsolaLabel_5.setPalette(palette)
-        self.ConsolaLabel_5.setAutoFillBackground(False)
-        self.ConsolaLabel_5.setTextFormat(QtCore.Qt.RichText)
-        self.ConsolaLabel_5.setScaledContents(True)
-        self.ConsolaLabel_5.setWordWrap(False)
-        self.ConsolaLabel_5.setObjectName("ConsolaLabel_5")
+        self.LABEL_ARCHIVO.setPalette(palette)
+        self.LABEL_ARCHIVO.setAutoFillBackground(False)
+        self.LABEL_ARCHIVO.setTextFormat(QtCore.Qt.RichText)
+        self.LABEL_ARCHIVO.setScaledContents(True)
+        self.LABEL_ARCHIVO.setWordWrap(False)
+        self.LABEL_ARCHIVO.setObjectName("LABEL_ARCHIVO")
         self.ConsolaLabel_6 = QtWidgets.QLabel(SetupTools)
         self.ConsolaLabel_6.setGeometry(QtCore.QRect(180, 150, 231, 51))
         palette = QtGui.QPalette()
@@ -1655,7 +1660,7 @@ class Ui_SetupTools(QWidget):
         self.label_11.raise_()
         self.mdiArea_4.raise_()
         self.pushButton.raise_()
-        self.COM_LIST.raise_()
+        self.COM_LIST[0].raise_()
         self.label_12.raise_()
         self.label_13.raise_()
         self.BAUDRATE_LIST.raise_()
@@ -1669,14 +1674,14 @@ class Ui_SetupTools(QWidget):
         self.pushButton_4.raise_()
         self.mdiArea_12.raise_()
         self.mdiArea_13.raise_()
-        self.pushButton_3.raise_()
+        self.CARGAR_ARCHIVO[0].raise_()
         self.pushButton_2.raise_()
         self.ConsolaLabel_2.raise_()
         self.ConsolaLabel_3.raise_()
         self.ConsolaLabel_4.raise_()
-        self.listView_2.raise_()
+        self.VISTA_COMANDOS.raise_()
         self.label_14.raise_()
-        self.IMEI_LABEL.raise_()
+        self.IMEI_LABEL[0].raise_()
         self.ICC_LABEL.raise_()
         self.TEL_LABEL.raise_()
         self.PAIS_LABEL.raise_()
@@ -1685,14 +1690,14 @@ class Ui_SetupTools(QWidget):
         self.mdiArea_14.raise_()
         self.pushButton_5.raise_()
         self.label_15.raise_()
-        self.BAUDRATE_LIST_2.raise_()
+        self.BYTE_SIZE[0].raise_()
         self.label_2.raise_()
         self.label_3.raise_()
-        self.ConsolaLabel_5.raise_()
+        self.LABEL_ARCHIVO.raise_()
         self.ConsolaLabel_6.raise_()
 
         self.retranslateUi(SetupTools)
-        self.COM_LIST.setCurrentIndex(0)
+        self.COM_LIST[0].setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(SetupTools)
 
     def retranslateUi(self, SetupTools):
@@ -1707,28 +1712,30 @@ class Ui_SetupTools(QWidget):
         self.label_9.setText(_translate("SetupTools", "PAIS     :"))
         self.label_10.setText(_translate("SetupTools", "MODELO:"))
         self.label_11.setText(_translate("SetupTools", "MCU     :"))
-        self.COM_LIST.setCurrentText(_translate("SetupTools", "COM3"))
-        self.COM_LIST.setItemText(0, _translate("SetupTools", "COM3"))
-        listaComs = self.ReadCOMS()
+        self.COM_LIST[0].setCurrentText(_translate("SetupTools", "COM3"))
+        self.COM_LIST[0].setItemText(0, _translate("SetupTools", "COM3"))
+        self.listaComs = self.ReadCOMS()
         j=0
-        for i in listaComs:
-            print(listaComs[j])
-            self.COM_LIST.addItem("")  
-            self.COM_LIST.setItemText(j, _translate("SetupTools",str(listaComs[j]) ))
+        for i in self.listaComs:
+            print(self.listaComs[j])
+            self.COM_LIST[0].addItem("")  
+            self.COM_LIST[0].setItemText(j, _translate("SetupTools",str(self.listaComs[j]) ))
             j = j +1
         self.label_12.setText(_translate("SetupTools", "COM PORT:"))
         self.label_13.setText(_translate("SetupTools", "<html><head/><body><p><span style=\" font-size:9pt;\">BAUDRATE:</span></p></body></html>"))
-        self.BAUDRATE_LIST.setCurrentText(_translate("SetupTools", "115200"))
+        
         self.BAUDRATE_LIST.setItemText(0, _translate("SetupTools", "9600"))
         self.BAUDRATE_LIST.setItemText(1, _translate("SetupTools", "115200"))
+        self.BAUDRATE_LIST.setCurrentText(_translate("SetupTools", "115200"))
+
         self.pushButton_2.setText(_translate("SetupTools", "EJECUTAR"))
-        self.pushButton_3.setText(_translate("SetupTools", "CARGAR ARCHIVO"))
+        self.CARGAR_ARCHIVO[0].setText(_translate("SetupTools", "CARGAR ARCHIVO"))
         self.pushButton_4.setText(_translate("SetupTools", "ENVIAR COMANDO"))
         self.ConsolaLabel_2.setText(_translate("SetupTools", "COMANDO LIBRE:"))
         self.ConsolaLabel_3.setText(_translate("SetupTools", "NOMBRE DE SCRIPT:"))
         self.ConsolaLabel_4.setText(_translate("SetupTools", "_________________________________________________________________________________"))
         self.label_14.setText(_translate("SetupTools", "MIGUEL.QUISPE@LOCATION-WORLD.COM"))
-        self.IMEI_LABEL.setText(_translate("SetupTools", str(self.IMEI_VALUE)))
+        self.IMEI_LABEL[0].setText(_translate("SetupTools", str(self.IMEI_VALUE[0])))
         self.ICC_LABEL.setText(_translate("SetupTools", "8934071100297777124"))
         self.TEL_LABEL.setText(_translate("SetupTools", "345901012443982"))
         self.PAIS_LABEL.setText(_translate("SetupTools", "Perú"))
@@ -1736,11 +1743,11 @@ class Ui_SetupTools(QWidget):
         self.MCU_LABEL.setText(_translate("SetupTools", "GV300WU_McuR00V2.01"))
         self.pushButton_5.setText(_translate("SetupTools", "ADMIN DISPOSITIVOS"))
         self.label_15.setText(_translate("SetupTools", "byte size"))
-        self.BAUDRATE_LIST_2.setCurrentText(_translate("SetupTools", "9600"))
-        self.BAUDRATE_LIST_2.setItemText(0, _translate("SetupTools", "9600"))
-        self.BAUDRATE_LIST_2.setItemText(1, _translate("SetupTools", "115200"))
+        self.BYTE_SIZE[0].setCurrentText(_translate("SetupTools", "8"))
+        self.BYTE_SIZE[0].setItemText(0, _translate("SetupTools", "8"))
+        self.BYTE_SIZE[0].setItemText(1, _translate("SetupTools", "16"))
         self.label_3.setText(_translate("SetupTools", "Versión: 1.11"))
-        self.ConsolaLabel_5.setText(_translate("SetupTools", "GV300W_INS_A07V30_PER_FLEET_BUFF_HI_CONFIG_M2MMOVLW_01022021.ini"))
+        self.LABEL_ARCHIVO.setText(_translate("SetupTools", "GV300W_INS_A07V30_PER_FLEET_BUFF_HI_CONFIG_M2MMOVLW_01022021.ini"))
 
     def ReadCOMS(self):
         result = []
@@ -1756,11 +1763,18 @@ class Ui_SetupTools(QWidget):
         return result   
 
     def getCOM(self):
-        port = self.COM_LIST.currentText()
+        model = QtGui.QStandardItemModel()
+        self.listView.setModel(model)
+        print(len(self.listaComs))
+        for i in self.listaComs:
+            item = QtGui.QStandardItem(i)
+            model.appendRow(item)
+
+        port = self.COM_LIST[0].currentText()
         baudrate = self.BAUDRATE_LIST.currentText()
         self.ser = serial.Serial(port , baudrate , timeout=5)
-        self.IMEI_VALUE = self.readIMEI()
-        self.IMEI_LABEL.setText(str(self.IMEI_VALUE))
+        self.IMEI_VALUE[0] = self.readIMEI()
+        self.IMEI_LABEL[0].setText(str(self.IMEI_VALUE[0]))
         self.ICC_VALUE = self.readICC()
         self.ICC_LABEL.setText(str(self.ICC_VALUE))
         self.readMODEL()
@@ -1768,31 +1782,37 @@ class Ui_SetupTools(QWidget):
         #self.MODELO_LABEL.setText(str(self.MODELO_VALUE))
     
     def connectCOM(self):
-        port = self.COM_LIST.currentText()
+        port = self.COM_LIST[0].currentText()
         baudrate = self.BAUDRATE_LIST.currentText()
         self.ser = serial.Serial(port , baudrate , timeout=5)
         IMEI = print("ICC: " + self.readICC())
         return IMEI
 
     def readICC(self):
-        cmd="AT+QCCID\r"
-        self.ser.write(cmd.encode())
-        time.sleep(0.7)
-        msg=self.ser.read(64)
-        msg = str(msg)
-        m = msg.rsplit("\\r\\n")
-        n = m[1].rsplit(": ")
-        return(n[1])
+        try:
+            cmd="AT+QCCID\r"
+            self.ser.write(cmd.encode())
+            time.sleep(0.7)
+            msg=self.ser.read(64)
+            msg = str(msg)
+            m = msg.rsplit("\\r\\n")
+            n = m[1].rsplit(": ")
+            return(n[1])
+        except:
+            return "error"
 
     def readIMEI(self):
-        cmd="AT+CGSN\r"
-        self.ser.write(cmd.encode())
-        time.sleep(0.7)
-        msg=self.ser.read(64)
-        msg = str(msg)
-        #m = msg.rsplit("QCCID: ")
-        m = msg.rsplit("\\r\\n")
-        return m[1]
+        try:
+            cmd="AT+CGSN\r"
+            self.ser.write(cmd.encode())
+            time.sleep(0.7)
+            msg=self.ser.read(64)
+            msg = str(msg)
+            #m = msg.rsplit("QCCID: ")
+            m = msg.rsplit("\\r\\n")
+            return m[1]
+        except:
+            return "error"
 
     def readMODEL(self):
         cmd="AT+GTBSI\r"
@@ -1808,8 +1828,21 @@ class Ui_SetupTools(QWidget):
     def getfiles(self):
         fileName = QFileDialog.getOpenFileName(self, 'Open File', 'c:/')[0]
         pixmap = QPixmap(fileName)
-        self.label.setPixmap(QPixmap(pixmap))
-        self.resize(400, 300)
+        f = fileName.split("/")
+        nombre_de_archivo = f[len(f)-1]
+        print(f[len(f)-1])
+        print(fileName)
+        self.COMANDOS = open(fileName, 'r').read()
+        print("Los comandos son: \n")
+        print(self.COMANDOS)
+        self.LABEL_ARCHIVO.setText(nombre_de_archivo)
+        model = QtGui.QStandardItemModel()
+        self.VISTA_COMANDOS.setModel(model)
+        
+        c = self.COMANDOS.split("\n")
+        for i in c:
+            item = QtGui.QStandardItem(i)
+            model.appendRow(item)
     
 if __name__ == "__main__":
     import sys
@@ -1821,6 +1854,6 @@ if __name__ == "__main__":
 
     SetupTools.show()
     icon = QtGui.QIcon()
-    icon.addPixmap(QtGui.QPixmap("setuptools.JPG"), QtGui.QIcon.Selected, QtGui.QIcon.On)
+    icon.addPixmap(QtGui.QPixmap("setuptools.ico"), QtGui.QIcon.Selected, QtGui.QIcon.On)
     SetupTools.setWindowIcon(icon)
     sys.exit(app.exec_())
